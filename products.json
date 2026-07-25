@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "مثقاب بوش",
+    "category": "أدوات كهربائية",
+    "image": "https://via.placeholder.com/300x200?text=مثقاب",
+    "status": "available",
+    "description": "مثقاب شحن 18 فولت."
+  },
+  {
+    "id": 2,
+    "name": "سلم ألمنيوم",
+    "category": "معدات",
+    "image": "https://via.placeholder.com/300x200?text=سلم",
+    "status": "borrowed",
+    "description": "سلم بطول 3 أمتار."
+  },
+  {
+    "id": 3,
+    "name": "ميزان ليزر",
+    "category": "أجهزة قياس",
+    "image": "https://via.placeholder.com/300x200?text=ليزر",
+    "status": "available",
+    "description": "ميزان ليزر احترافي."
+  }
+]
