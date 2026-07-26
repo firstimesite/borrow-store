@@ -51,7 +51,9 @@ fetch("data/products.json")
   .catch(error => {
     console.error("خطأ في تحميل المنتجات:", error);
   });
-let cart = [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+document.getElementById("cartCount").innerText = cart.length;
 
 function addToCart(id){
 
