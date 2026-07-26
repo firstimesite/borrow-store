@@ -1,10 +1,5 @@
 const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-document.getElementById("cartItems").innerHTML =
-    "<h5>محتويات السلة:</h5><pre>" +
-    JSON.stringify(cart, null, 2) +
-    "</pre>";
-
 fetch("data/products.json")
   .then(response => response.json())
   .then(products => {
@@ -26,6 +21,8 @@ fetch("data/products.json")
       return;
     }
 
+    container.innerHTML = "";
+
     selectedProducts.forEach(product => {
 
       const status =
@@ -35,33 +32,32 @@ fetch("data/products.json")
 
       container.innerHTML += `
         <div class="card mb-3">
-
           <div class="card-body">
 
             <h4>${product.name}</h4>
 
             <p>${product.description}</p>
 
-${status}
+            ${status}
 
-<br><br>
+            <br><br>
 
-<button
-class="btn btn-danger"
-onclick="removeFromCart(${product.id})">
+            <button
+              class="btn btn-danger"
+              onclick="removeFromCart(${product.id})">
 
-🗑 حذف من السلة
+              🗑 حذف من السلة
 
-</button>
+            </button>
 
           </div>
-
         </div>
       `;
 
     });
 
   });
+
 function removeFromCart(id){
 
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -69,9 +65,7 @@ function removeFromCart(id){
     const index = cart.indexOf(id);
 
     if(index !== -1){
-
         cart.splice(index,1);
-
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
