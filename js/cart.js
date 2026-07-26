@@ -42,7 +42,17 @@ fetch("data/products.json")
 
             <p>${product.description}</p>
 
-            ${status}
+${status}
+
+<br><br>
+
+<button
+class="btn btn-danger"
+onclick="removeFromCart(${product.id})">
+
+🗑 حذف من السلة
+
+</button>
 
           </div>
 
@@ -52,3 +62,20 @@ fetch("data/products.json")
     });
 
   });
+function removeFromCart(id){
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const index = cart.indexOf(id);
+
+    if(index !== -1){
+
+        cart.splice(index,1);
+
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    location.reload();
+
+}
