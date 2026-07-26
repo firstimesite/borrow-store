@@ -63,6 +63,6 @@ localStorage.setItem("cart", JSON.stringify(cart));
 
     document.getElementById("cartCount").innerText = cart.length;
 
-    alert("تمت إضافة المنتج إلى السلة");
+    alert("كيف الحال");
 
 }
