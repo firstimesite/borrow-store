@@ -31,9 +31,13 @@ fetch("data/products.json")
 
             <div class="card-footer">
 
-              <button class="btn btn-primary w-100">
-                🛒 إضافة إلى سلة الإعارة
-              </button>
+              <button
+  class="btn btn-primary w-100"
+  onclick="addToCart(${product.id})">
+
+  🛒 إضافة إلى سلة الإعارة
+
+</button>
 
             </div>
 
@@ -47,3 +51,14 @@ fetch("data/products.json")
   .catch(error => {
     console.error("خطأ في تحميل المنتجات:", error);
   });
+let cart = [];
+
+function addToCart(id){
+
+    cart.push(id);
+
+    document.getElementById("cartCount").innerText = cart.length;
+
+    alert("تمت إضافة المنتج إلى السلة");
+
+}
