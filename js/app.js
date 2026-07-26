@@ -1,5 +1,3 @@
-localStorage.clear();
-localStorage.removeItem("cart");
 fetch("data/products.json")
   .then(response => response.json())
   .then(products => {
