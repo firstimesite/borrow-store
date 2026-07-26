@@ -1,9 +1,5 @@
 const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-document.getElementById("cartItems").innerHTML =
-    "<h5>محتويات السلة:</h5><pre>" +
-    JSON.stringify(cart, null, 2) +
-    "</pre>";
 
 fetch("data/products.json")
   .then(response => response.json())
