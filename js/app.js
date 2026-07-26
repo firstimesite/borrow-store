@@ -57,7 +57,15 @@ document.getElementById("cartCount").innerText = cart.length;
 
 function addToCart(id){
 
-    cart.push(id);
+    if(cart.includes(id)){
+
+    alert("هذا المنتج موجود بالفعل في السلة");
+
+    return;
+
+}
+
+cart.push(id);
 
 localStorage.setItem("cart", JSON.stringify(cart));
 
