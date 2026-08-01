@@ -4,7 +4,7 @@
     "name": "مثقاب بوش",
     "category": "أدوات كهربائية",
     "image": "https://via.placeholder.com/300x200?text=مثقاب",
-    "status": "available",
+    "status": "borrowed",
     "description": "مثقاب شحن 18 فولت."
   },
   {
@@ -20,7 +20,7 @@
     "name": "ميزان ليزر",
     "category": "أجهزة قياس",
     "image": "https://via.placeholder.com/300x200?text=ليزر",
-    "status": "available",
+    "status": "borrowed",
     "description": "ميزان ليزر احترافي."
   }
 ]
