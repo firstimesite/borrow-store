@@ -60,6 +60,25 @@ document.getElementById("borrowForm").addEventListener("submit", function(e){
     e.preventDefault();
 
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    fetch("data/products.json")
+.then(response => response.json())
+.then(products => {
+
+    const list = document.getElementById("selectedProducts");
+
+    const selectedProducts = products.filter(product =>
+        cart.includes(product.id)
+    );
+
+    selectedProducts.forEach(product => {
+
+        list.innerHTML += `
+            <li>${product.name}</li>
+        `;
+
+    });
+
+});
 
     fetch("data/products.json")
     .then(response => response.json())
