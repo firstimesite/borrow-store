@@ -15,6 +15,27 @@ fetch("data/products.json")
           ? '<span class="badge bg-success">🟢 متاح</span>'
           : '<span class="badge bg-danger">🔴 مُعار</span>';
 
+      const button =
+        product.status === "available"
+          ? `
+            <button
+              class="btn btn-primary w-100"
+              onclick="addToCart(${product.id})">
+
+              🛒 إضافة إلى سلة الإعارة
+
+            </button>
+          `
+          : `
+            <button
+              class="btn btn-secondary w-100"
+              disabled>
+
+              🔴 المنتج مُعار
+
+            </button>
+          `;
+
       container.innerHTML += `
         <div class="col-md-4 mb-4">
 
@@ -37,13 +58,7 @@ fetch("data/products.json")
 
             <div class="card-footer">
 
-              <button
-                class="btn btn-primary w-100"
-                onclick="addToCart(${product.id})">
-
-                🛒 إضافة إلى سلة الإعارة
-
-              </button>
+              ${button}
 
             </div>
 
