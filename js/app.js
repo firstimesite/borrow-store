@@ -17,6 +17,7 @@ fetch("data/products.json")
 
       container.innerHTML += `
         <div class="col-md-4 mb-4">
+
           <div class="card h-100 shadow-sm">
 
             <img
@@ -47,6 +48,7 @@ fetch("data/products.json")
             </div>
 
           </div>
+
         </div>
       `;
 
@@ -70,8 +72,6 @@ function addToCart(id) {
   }
 
   cart.push(id);
-
-  alert(JSON.stringify(cart));
 
   localStorage.setItem("cart", JSON.stringify(cart));
 
