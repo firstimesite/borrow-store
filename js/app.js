@@ -1,3 +1,7 @@
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+document.getElementById("cartCount").innerText = cart.length;
+
 fetch("data/products.json")
   .then(response => response.json())
   .then(products => {
@@ -15,9 +19,10 @@ fetch("data/products.json")
         <div class="col-md-4 mb-4">
           <div class="card h-100 shadow-sm">
 
-            <img src="${product.image}"
-                 class="card-img-top"
-                 alt="${product.name}">
+            <img
+              src="${product.image}"
+              class="card-img-top"
+              alt="${product.name}">
 
             <div class="card-body">
 
@@ -32,12 +37,12 @@ fetch("data/products.json")
             <div class="card-footer">
 
               <button
-  class="btn btn-primary w-100"
-  onclick="addToCart(${product.id})">
+                class="btn btn-primary w-100"
+                onclick="addToCart(${product.id})">
 
-  🛒 إضافة إلى سلة الإعارة
+                🛒 إضافة إلى سلة الإعارة
 
-</button>
+              </button>
 
             </div>
 
@@ -49,28 +54,29 @@ fetch("data/products.json")
 
   })
   .catch(error => {
+
     console.error("خطأ في تحميل المنتجات:", error);
+
   });
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-document.getElementById("cartCount").innerText = cart.length;
+function addToCart(id) {
 
-function addToCart(id){
-
-    if(cart.includes(id)){
+  if (cart.includes(id)) {
 
     alert("هذا المنتج موجود بالفعل في السلة");
 
     return;
 
-}
+  }
 
-cart.push(id);
+  cart.push(id);
 
-localStorage.setItem("cart", JSON.stringify(cart));
+  alert(JSON.stringify(cart));
 
-    document.getElementById("cartCount").innerText = cart.length;
+  localStorage.setItem("cart", JSON.stringify(cart));
 
-    alert("كيف الحال");
+  document.getElementById("cartCount").innerText = cart.length;
+
+  alert("تمت إضافة المنتج إلى السلة");
 
 }
