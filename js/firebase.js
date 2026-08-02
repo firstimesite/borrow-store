@@ -11,4 +11,4 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-console.log("تم الاتصال بـ Firebase");
+
