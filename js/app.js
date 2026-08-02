@@ -1,82 +1,104 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDnNZDXOFX_588n5UeACnnU8gqkz12eGnI",
+  authDomain: "borrow-store.firebaseapp.com",
+  projectId: "borrow-store",
+  storageBucket: "borrow-store.firebasestorage.app",
+  messagingSenderId: "710255570161",
+  appId: "1:710255570161:web:b0a5a5da3e35950ca68d50"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 document.getElementById("cartCount").innerText = cart.length;
 
-fetch("data/products.json")
-  .then(response => response.json())
-  .then(products => {
+async function loadProducts() {
 
-    const container = document.getElementById("products");
+  const container = document.getElementById("products");
 
-    products.forEach(product => {
+  container.innerHTML = "";
 
-      const status =
-        product.status === "available"
-          ? '<span class="badge bg-success">🟢 متاح</span>'
-          : '<span class="badge bg-danger">🔴 مُعار</span>';
+  const snapshot = await getDocs(collection(db, "products"));
 
-      const button =
-        product.status === "available"
-          ? `
-            <button
-              class="btn btn-primary w-100"
-              onclick="addToCart(${product.id})">
+  snapshot.forEach((doc) => {
 
-              🛒 إضافة إلى سلة الإعارة
+    const product = doc.data();
 
-            </button>
-          `
-          : `
-            <button
-              class="btn btn-secondary w-100"
-              disabled>
+    product.id = doc.id;
 
-              🔴 المنتج مُعار
+    const status =
+      product.status === "available"
+        ? '<span class="badge bg-success">🟢 متاح</span>'
+        : '<span class="badge bg-danger">🔴 مُعار</span>';
 
-            </button>
-          `;
+    const button =
+      product.status === "available"
+        ? `
+          <button
+            class="btn btn-primary w-100"
+            onclick="addToCart('${product.id}')">
 
-      container.innerHTML += `
-        <div class="col-md-4 mb-4">
+            🛒 إضافة إلى سلة الإعارة
 
-          <div class="card h-100 shadow-sm">
+          </button>
+        `
+        : `
+          <button
+            class="btn btn-secondary w-100"
+            disabled>
 
-            <img
-              src="${product.image}"
-              class="card-img-top"
-              alt="${product.name}">
+            🔴 المنتج مُعار
 
-            <div class="card-body">
+          </button>
+        `;
 
-              <h5>${product.name}</h5>
+    container.innerHTML += `
+      <div class="col-md-4 mb-4">
 
-              <p>${product.description}</p>
+        <div class="card h-100 shadow-sm">
 
-              ${status}
+          <img
+            src="${product.image}"
+            class="card-img-top"
+            alt="${product.name}">
 
-            </div>
+          <div class="card-body">
 
-            <div class="card-footer">
+            <h5>${product.name}</h5>
 
-              ${button}
+            <p>${product.description}</p>
 
-            </div>
+            ${status}
+
+          </div>
+
+          <div class="card-footer">
+
+            ${button}
 
           </div>
 
         </div>
-      `;
 
-    });
-
-  })
-  .catch(error => {
-
-    console.error("خطأ في تحميل المنتجات:", error);
+      </div>
+    `;
 
   });
 
-function addToCart(id) {
+}
+
+window.addToCart = function(id) {
 
   if (cart.includes(id)) {
 
@@ -94,4 +116,6 @@ function addToCart(id) {
 
   alert("تمت إضافة المنتج إلى السلة");
 
-}
+};
+
+loadProducts();
