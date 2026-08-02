@@ -1,5 +1,11 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
+import {
+  getFirestore,
+  collection,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyDnNZDXOFX_588n5UeACnnU8gqkz12eGnI",
   authDomain: "borrow-store.firebaseapp.com",
@@ -11,4 +17,18 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
+const db = getFirestore(app);
 
+async function testFirebase() {
+
+  const snapshot = await getDocs(collection(db, "products"));
+
+  snapshot.forEach((doc) => {
+
+    console.log(doc.id, doc.data());
+
+  });
+
+}
+
+testFirebase();
